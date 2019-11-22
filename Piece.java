@@ -1,13 +1,21 @@
 abstract public class Piece {
 
-	private String pieceName;
-	private char pieceSymbol;
+	protected String pieceName;
+	protected char pieceSymbol;
 
-	public String getName() {
+	protected String getName() {
 		return pieceName;
 	}
 
-	public char getSymbol() {
+	protected char getSymbol() {
 		return pieceSymbol;
+	}
+
+	protected void setName(String name) {
+		this.pieceName = name;
+	}
+
+	protected void setSymbol(char sym) {
+		this.pieceSymbol = sym;
 	}
 }
