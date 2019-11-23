@@ -12,14 +12,18 @@ public class Board {
 	protected Piece[][] board;
 	protected int dimX;
 	protected int dimY;
+	// protected char[] xVals; // Not fully implemented with printBoard yet. Do later.
+	// protected char[] yVals;
 	protected String xBorder;
 	protected String yBorder;
 	protected char nullChar;
 
-	public Board(int dimY, int dimX, char nullChar) {
+	public Board(int dimY, int dimX, /*String yVals, String xVals,*/ char nullChar) {
 		this.board = new Piece[dimY][dimX];
 		this.dimX = dimX;
 		this.dimY = dimY;
+		//this.xVals = xVals.toCharArray();
+		//this.yVals = yVals.toCharArray();
 		this.xBorder = "< " + new String(new char[dimX]).replace("\0", "- ") + ">";
 		this.yBorder = "|";
 		this.nullChar = nullChar;
@@ -65,8 +69,19 @@ public class Board {
 			board[y][x] = null;
 		}
 	}
+
+	// The printing specifications/conditions for the board.
+	protected void printSpec(int i, int j) {
+		char pieceSymbol = getPieceSymbol(i, j);
+		// If the symbol isn't representing an empty spot, colour it blue.
+		if (pieceSymbol == nullChar) {
+			System.out.print(pieceSymbol + " ");
+		} else {
+			System.out.print(ANSI_BLUE + pieceSymbol + ANSI_RESET + " ");
+		}
+	}
 	
-	// Prints the state of the board.	
+	// Prints the entire board. Must provide print specifications.
 	protected void printBoard() {
 		System.out.println(xBorder);
 		// For every row.
@@ -74,13 +89,7 @@ public class Board {
 			System.out.print(yBorder + " ");
 			// For every column.
 			for (int j = 0; j < dimX; j++) {
-				char pieceSymbol = getPieceSymbol(i, j);
-				// If the symbol isn't representing an empty spot, colour it blue.
-				if (pieceSymbol == nullChar) {
-					System.out.print(pieceSymbol + " ");
-				} else {
-					System.out.print(ANSI_BLUE + pieceSymbol + ANSI_RESET + " ");
-				}
+				printSpec(i, j);
 			}
 			System.out.println(yBorder);
 		}
@@ -91,22 +100,12 @@ public class Board {
 	 * Main method is for debugging. Remove later.
 	 */
 	
-	//public static void main(String[] args) {
-	//	Board emptyBoard = new Board(8, 8, '+');
-	//	PawnPiece pawn = new PawnPiece();
+	public static void main(String[] args) {
+		Board emptyBoard = new Board(8, 8, '+');
+		EmptyPiece pawn = new EmptyPiece();
 
-	//	emptyBoard.printBoard();
-	//	emptyBoard.addPiece(2, 3, pawn);
-	//	emptyBoard.printBoard();
-	//	emptyBoard.addPiece(3, 4, pawn);
-	//	emptyBoard.printBoard();
-	//	emptyBoard.removePiece(2, 3);
-	//	emptyBoard.printBoard();
-	//	emptyBoard.removePiece(2, 3);
-	//	emptyBoard.printBoard();
-	//	emptyBoard.addPiece(7, 7, pawn);
-	//	emptyBoard.printBoard();
-	//	emptyBoard.addPiece(7, 7, pawn);
-	//	emptyBoard.printBoard();
-	//}
+		emptyBoard.printBoard();
+		emptyBoard.addPiece(3, 3, pawn);
+		emptyBoard.printBoard();
+	}
 }
