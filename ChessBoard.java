@@ -15,7 +15,7 @@ public class ChessBoard extends Board {
 	private final Piece redKnight = new KnightPiece("Red");
 
 	public ChessBoard() {
-		super(8, 8, '+');
+		super(8, 8, "12345678", "ABCDEFGH", '+');
 		setBoard();
 	}
 	

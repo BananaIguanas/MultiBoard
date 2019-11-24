@@ -12,18 +12,19 @@ public class Board {
 	protected Piece[][] board;
 	protected int dimX;
 	protected int dimY;
-	// protected char[] xVals; // Not fully implemented with printBoard yet. Do later.
-	// protected char[] yVals;
+	protected char[] xVals; // Not fully implemented with printBoard yet. Do later.
+	protected char[] yVals;
 	protected String xBorder;
 	protected String yBorder;
 	protected char nullChar;
 
-	public Board(int dimY, int dimX, /*String yVals, String xVals,*/ char nullChar) {
+
+	public Board(int dimY, int dimX, String yVals, String xVals, char nullChar) {
 		this.board = new Piece[dimY][dimX];
 		this.dimX = dimX;
 		this.dimY = dimY;
-		//this.xVals = xVals.toCharArray();
-		//this.yVals = yVals.toCharArray();
+		this.xVals = xVals.toCharArray();
+		this.yVals = yVals.toCharArray();
 		this.xBorder = "< " + new String(new char[dimX]).replace("\0", "- ") + ">";
 		this.yBorder = "|";
 		this.nullChar = nullChar;
@@ -81,19 +82,67 @@ public class Board {
 		}
 	}
 	
+	// Prints the top part of the board.
+	protected void printXBorderTop() {
+		// Print the values if they exist. Add space before border.
+		if (xVals.length != 0) {
+			System.out.print("   ");
+			for (char c : xVals) {
+				System.out.print(c + " ");
+			}
+			System.out.print(" \n ");
+		}
+		// Print the border.
+		System.out.println(xBorder);
+	}
+	
+	// Prints the bottom part of the board.
+	protected void printXBorderBottom() {
+		if (xVals.length != 0) {
+			// If there are values, print the border first, then the values. Add space before border.
+			System.out.println(" " + xBorder);
+			System.out.print("   ");
+			for (char c : xVals) {
+				System.out.print(c + " ");
+			}
+			System.out.print(" \n");
+		} else {
+			// If there are not, just print the border.
+			System.out.println(xBorder);
+		}
+	}
+	
+	// Prints the left part of the board.	
+	protected void printYBorderLeft(int cntr) {
+		if (yVals.length != 0) {
+			System.out.print(yVals[cntr]);
+		}
+		System.out.print(yBorder + " ");
+	}
+
+	// Prints the right part of the board.
+	protected void printYBorderRight(int cntr) {
+		if (yVals.length != 0) {
+			System.out.print(yBorder);
+			System.out.println(yVals[cntr]);
+		} else {
+			System.out.println(yBorder);
+		}
+	}
+
 	// Prints the entire board. Must provide print specifications.
 	protected void printBoard() {
-		System.out.println(xBorder);
+		printXBorderTop();
 		// For every row.
 		for (int i = 0; i < dimY; i++) {
-			System.out.print(yBorder + " ");
+			printYBorderLeft(i);
 			// For every column.
 			for (int j = 0; j < dimX; j++) {
 				printSpec(i, j);
 			}
-			System.out.println(yBorder);
+			printYBorderRight(i);
 		}
-		System.out.println(xBorder);
+		printXBorderBottom();
 	}
 
 	/*
@@ -101,11 +150,13 @@ public class Board {
 	 */
 	
 	public static void main(String[] args) {
-		Board emptyBoard = new Board(8, 8, '+');
+		Board emptyBoard = new Board(10, 20, "0123456789", "ABCDEFGHIJ", '+');
 		EmptyPiece pawn = new EmptyPiece();
 
-		emptyBoard.printBoard();
 		emptyBoard.addPiece(3, 3, pawn);
+		emptyBoard.addPiece(3, 4, pawn);
+		emptyBoard.addPiece(3, 5, pawn);
+		emptyBoard.addPiece(3, 6, pawn);
 		emptyBoard.printBoard();
 	}
 }
