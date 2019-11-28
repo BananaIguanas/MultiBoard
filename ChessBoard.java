@@ -68,15 +68,4 @@ public class ChessBoard extends Board {
 		}
 	}
 
-
-
-	/*
-	 * Main method is for debugging. Remove later.
-	 */
-	
-	public static void main(String[] args) {
-		ChessBoard emptyBoard = new ChessBoard);
-
-		emptyBoard.printBoard();
-	}
 }

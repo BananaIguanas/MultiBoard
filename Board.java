@@ -145,18 +145,4 @@ public class Board {
 		printXBorderBottom();
 	}
 
-	/*
-	 * Main method is for debugging. Remove later.
-	 */
-	
-	//public static void main(String[] args) {
-	//	Board emptyBoard = new Board(8, 8, "12345678", "ABCDEFGH", '+');
-	//	EmptyPiece pawn = new EmptyPiece();
-
-	//	emptyBoard.addPiece(3, 3, pawn);
-	//	emptyBoard.addPiece(3, 4, pawn);
-	//	emptyBoard.addPiece(3, 5, pawn);
-	//	emptyBoard.addPiece(3, 6, pawn);
-	//	emptyBoard.printBoard();
-	//}
 }

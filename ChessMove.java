@@ -17,21 +17,12 @@ public class ChessMove {
 			char[] tokens = name.toCharArray();
 			int rank = tokens[0] - 'A';
 			int file = tokens[1] - '1';
-			int[] location = new int[]{file, rank};
-			return location;
+			if (rank < 8 && file < 8) {
+				int[] location = new int[]{file, rank};
+				return location;
+			}
 		}
 		return null;
 	}
-
-	/*
-	 * Main method for debugging.
-	 */
-
-	//public static void main(String[] args)  {
-	//	ChessMove move = new ChessMove("A1", "E3");
-	//	for (int i : move.destLocation) {
-	//		System.out.println(i);
-	//	}
-	//}
 
 } 
