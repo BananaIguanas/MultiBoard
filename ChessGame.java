@@ -11,11 +11,10 @@ public class ChessGame {
 	private static Deque<ChessMove> moveHistory = new Deque()<>;
 
 	public static void main(String[] args) {
-		
-		Scanner input = new Scanner("What would you like to do? ");
-		
+		System.out.println("Chess Game started. Type \"Help\" for a list of options.")
 		while (true) {
-			
+			Scanner input = new Scanner(">>> ");
+			processUserInput(input)
 		}
 	}
 
@@ -47,20 +46,18 @@ public class ChessGame {
 
 			System.out.println("Game has successfully been saved");
 		} catch (Exception e) {
-			System.out.println("Game did not save successfully");
+			System.out.println("There was an issue saving the game");
 		}
 	}
 
 	private void loadGame(String filename) {
 		try {
-			ChessSaveObj load;
-			
 			// Open streams
 			FileInputStream file = new FileInputStream(filename);
 			ObjectInputStream inStream = new ObjectInputStream(file);
 
 			// load object
-			load = inStream.readObject();
+			ChessSaveObj load = inStream.readObject();
 
 			// Close streams
 			inStream.close();
@@ -75,7 +72,7 @@ public class ChessGame {
 
 			System.out.println("Game has successfully been loaded");
 		} catch (Exception e) {
-			System.out.println("Game did not load successfully");
+			System.out.println("There was an issue loading the game");
 		}
 	}
 }

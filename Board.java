@@ -6,7 +6,7 @@ public class Board {
 
 	/*
 	 * We do things with rows first and then columns. Y represents rows.
-	 * X represents columns.
+	 * X represents columns. There it is common to see YX ordered pairs.
 	 */
 	
 	protected Piece[][] board;

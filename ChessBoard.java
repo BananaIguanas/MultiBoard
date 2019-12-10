@@ -1,12 +1,16 @@
 public class ChessBoard extends Board {
 	
 	// List of piece instances which we can use to reference.
+	
+	// Blue Pieces
 	private final Piece bluePawn = new PawnPiece("Blue");
 	private final Piece blueKing = new KingPiece("Blue");
 	private final Piece blueQueen = new QueenPiece("Blue");
 	private final Piece blueBishop = new BishopPiece("Blue");
 	private final Piece blueRook = new RookPiece("Blue");
 	private final Piece blueKnight = new KnightPiece("Blue");
+
+	// Red Pieces
 	private final Piece redPawn = new PawnPiece("Red");
 	private final Piece redKing = new KingPiece("Red");
 	private final Piece redQueen = new QueenPiece("Red");
@@ -52,6 +56,11 @@ public class ChessBoard extends Board {
 		// Set the kings.
 		addPiece(0, 4, redKing);
 		addPiece(7, 4, blueKing);
+	}
+	
+	// Returns true if successful. Checks if the move is valid as well.
+	protected boolean movePiece(int startX, int startY, int finY, int finX) {
+		
 	}
 
 	@Override

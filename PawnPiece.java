@@ -7,6 +7,6 @@ public class PawnPiece extends Piece {
 	}
 
 	public void getPathList() {
-		return;
+		
 	}
 }
