@@ -1,6 +1,19 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
+import java.lang.System;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+
+/* Note to delete later: In the old days, we normally had to use an iterator to loop through a data structure.
+ * However, if we are only doing simple stuff, we can now just use an enchanced for loop.
+ * For example: If we simply want to print out all the items in a data structure, there is no need to
+ * use a while loop with an iterator. We can simply just use an enchanced for loop.
+ * If we wanted to do more complicated stuff like loop through and delete, then we should use the iterator with
+ * a while loop. The enchanced for loop does not require an iterator to be provided, it will grab the iterator
+ * by itself.
+ */
 
 public class ChessGame {
 	
@@ -8,29 +21,71 @@ public class ChessGame {
 	private static Player player1;
 	private static Player player2;
 	private static int turnCounter = 0;
-	private static Deque<ChessMove> moveHistory = new Deque()<>;
+	private static Deque<ChessMove> moveHistory = new Deque<>();
+	private static String fileName = "instructions.txt";
 
 	public static void main(String[] args) {
-		System.out.println("Chess Game started. Type \"Help\" for a list of options.")
+		System.out.println("Chess Game started. Type \"Help\" for a list of options.");
 		while (true) {
 			Scanner input = new Scanner(">>> ");
-			processUserInput(input)
+			processUserInput(input);
 		}
 	}
 
-	// Grabs user input from STDIN and processes it. Will tokenize.
+	private void printHelp() { 
+		try {
+			List<String> helpFile = File.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+			for (String i : helpFile) {
+				// Might need to use print() instead of println() to prevent random new lines, especially if
+				// New line characters already exist in the string. Fix later.
+				Sysytem.out.println(i);
+			}
+		} catch (Exception e) {
+			System.out.println("The instructions.txt file does not exist.");
+		}
+	}
+
+	// Grabs user input from STDIN and processes it. Will tokenize using space as a delimiter.
 	private void processUserInput(String input) {
-		String inputArray[] = input.split(" ");
+		String inputArray[] = input.toLowerCase().split(" ");
 
 		switch (input[0]) {
 			case "move":
-				// To do: Breka up the String input.
-				chessBoard.movePiece(/*...*/)
-			case "exit":
+				int[] startPos = processChessLocation(inputArray[1]);
+				int[] endPos = processChessLocation(inputArray[2]);
+				// Still need to write movePiece() in ChessBoard.java.
+				chessBoard.movePiece(startPos[0], startPos[1], endPos[0], endPos[1]);
+				break;
+			case "exit": 
+				System.exit(0);
+				break;
 			case "quit":
+				System.exit(0);
+				break;
 			case "save":
+				saveGame();
+				break;
 			case "load":
+				loadGame();
+				break;
+			case "help":
+				printHelp();
+				break;
 		}
+	}
+
+	// Converts a chess board location to a set of integers.
+	private int[] processChessLocation(String input) {
+		if (input.length() == 2) {
+			char[] tokens = name.toCharArray();
+			int rank = tokens[0] - 'A';
+			int file = tokens[1] - '1';
+			if (rank < 8 && file < 8) {
+				int[] location = new int[] {file, rank};
+				return location;
+			}
+		}
+		return null;
 	}
 
 	// Maybe just setGame()?
