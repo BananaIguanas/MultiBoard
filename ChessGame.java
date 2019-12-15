@@ -18,8 +18,19 @@ public class ChessGame {
 		}
 	}
 
+	// Grabs user input from STDIN and processes it. Will tokenize.
 	private void processUserInput(String input) {
-		
+		String inputArray[] = input.split(" ");
+
+		switch (input[0]) {
+			case "move":
+				// To do: Breka up the String input.
+				chessBoard.movePiece(/*...*/)
+			case "exit":
+			case "quit":
+			case "save":
+			case "load":
+		}
 	}
 
 	// Maybe just setGame()?
@@ -27,6 +38,7 @@ public class ChessGame {
 		
 	}
 
+	// Saves the game using serialization.
 	private void saveGame() {
 		try {
 			// Pack state into save object
@@ -50,6 +62,7 @@ public class ChessGame {
 		}
 	}
 
+	// Loads the game using serialization.
 	private void loadGame(String filename) {
 		try {
 			// Open streams
