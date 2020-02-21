@@ -131,7 +131,8 @@ public class ChessGame {
 			inStream.close();
 			file.close();
 
-			// Set the load state
+			// Set the load state. You should not use "this" to access static variables of the ChessGame class.
+			// Changes these to either ChessGame.chessBoard or just chessBoard and etc.
 			this.chessBoard = load.getChessBoard();
 			this.moveHistory = load.getMoveHistory();
 			this.player1 = load.getPlayer1();
