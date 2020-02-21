@@ -15,6 +15,9 @@ import java.nio.file.*;
  * by itself.
  */
 
+// FIXME: Make all other methods STATIC otherwise they cannot be accessed via the main method.
+// Static methods can only access other static fields and other static methods.
+
 public class ChessGame {
 	
 	private static Board chessBoard = new ChessBoard();
